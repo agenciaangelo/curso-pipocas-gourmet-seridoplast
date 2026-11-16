@@ -126,7 +126,7 @@
   <div class="card done" id="done">
     <div class="big">🍿</div>
     <h2 id="doneTitle">Inscrição confirmada!</h2>
-    <p class="note" id="doneMsg" style="font-size:15px">Te esperamos na quinta-feira, 19/11, às 14h, na Seridóplast Alecrim.</p>
+    <p class="note" id="doneMsg" style="font-size:15px">Te esperamos na quinta-feira, 19/11, das 14h às 17h, na Seridóplast Alecrim.</p>
     <div class="summary" id="summary"></div>
     <button class="ghost" id="back" type="button">Fazer outra inscrição</button>
   </div>
@@ -140,7 +140,7 @@ const CONFIG = {
   // Cole aqui a URL do App da Web do Google Apps Script (termina em /exec)
   endpoint: "https://script.google.com/macros/s/AKfycbznwzxqBo8mN2V64tle8W7KRKlJ3LLEllIaF7j5JLXSraZy2m1-v3ZvKcaVd-1NpTRS/exec",
   data: "Quinta-feira, 19/11",
-  horario: "14h",
+  horario: "14h às 17h",
   local: "Seridóplast Alecrim",
   investimento: "Gratuito",
   vagas: "Vagas limitadas"
@@ -184,7 +184,7 @@ form.addEventListener("submit", async e=>{
   try{
     const r = await fetch(CONFIG.endpoint,{method:"POST",body:new URLSearchParams(payload)});
     const res = await r.json();
-    if(res.status==="ok") showDone("Inscrição confirmada!",`Te esperamos na ${CONFIG.data.toLowerCase()}, às ${CONFIG.horario}, na ${CONFIG.local}.`,payload);
+    if(res.status==="ok") showDone("Inscrição confirmada!",`Te esperamos na ${CONFIG.data.toLowerCase()}, das ${CONFIG.horario}, na ${CONFIG.local}.`,payload);
     else if(res.status==="duplicado") showDone("Você já está inscrito(a)!","Encontramos uma inscrição com este WhatsApp. Sua vaga está garantida.",payload);
     else if(res.status==="esgotado") showDone("Vagas esgotadas 😕","As vagas para esta turma acabaram. Fique de olho no Instagram da Seridóplast para as próximas turmas.",null);
     else throw new Error(res.message||"erro");
